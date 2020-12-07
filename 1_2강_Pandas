@@ -1,0 +1,2895 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "1-2강 Pandas의 사본의 사본",
+      "provenance": [],
+      "collapsed_sections": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/kim-jiha95/data_diving/blob/main/1_2%EA%B0%95_Pandas\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "9UtfduPSva8f"
+      },
+      "source": [
+        "# ⛔ 강의를 시작하기 전에  \n",
+        "</br>\n",
+        "\n",
+        "## ✍ 지난 시간 복습하기\n",
+        "\n",
+        "```\n",
+        "간단히 지난 시간 강의내용 복습을 진행해주세요 🔥🔥\n",
+        "```\n",
+        "\n",
+        "</br>\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Sa9_tEYoYn_P"
+      },
+      "source": [
+        "#🔥Lesson 2, Deep Dive into 판다스(Pandas)!  \n",
+        "🏊🏻‍♀️🏊🏻🏊🏻‍♂️🏊🏻‍♀️🏊🏻🏊🏻‍♂️🏊🏻‍♀️🏊🏻🏊🏻‍♂️🏊🏻‍♀️🏊🏻🏊🏻‍♂️🏊🏻‍♀️🏊🏻🏊🏻‍♂️🏊🏻‍♀️🏊🏻🏊🏻‍♂️🏊🏻‍♀️🏊🏻🏊🏻‍♂️🏊🏻‍♀️🏊🏻🏊🏻‍♂️\n",
+        "\n",
+        "## ⛳ 무엇을 배우나요?\n",
+        "\n",
+        "<img src = \"https://1.bp.blogspot.com/-eoV5My8inEM/Xp6leGwfgAI/AAAAAAAAASw/1VoFO4JgO-YyOdhvCkqlMrtDeuPgz5K9ACLcBGAsYHQ/s1600/%25E1%2584%2589%25E1%2585%25B3%25E1%2586%25AF%25E1%2584%2585%25E1%2585%25A1%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2583%25E1%2585%25B33.png\" width = \"1000\">\n",
+        "\n",
+        "\n",
+        "## 🌈 개요\n",
+        "\n",
+        " Pandas는 데이터 생성 및 분석을 위한 파이썬의 패키지 중 하나입니다. Pandas의 이름은 Panel Data라는 계량경제학 용어에서 비롯되었으며, 파이썬에서는 Pandas Series와 Pandas DataFrame 두 가지의 자료 구조를 구현하고 있습니다.  \n",
+        " 위의 언급된 자료 구조들은 레이블링 및 데이터의 관계를 파악하는 데에 비교적 직관적인 형태로 되어 있어서, 데이터 분석에 있어서 굉장히 효과적이고 중요한 내용을 담고 있습니다.\n",
+        "![대체 텍스트](https://t1.daumcdn.net/cfile/tistory/99398D505C764B9423)\n",
+        "\n",
+        "## 🔫Pandas vs Excel  \n",
+        "판다스와 엑셀의 대결은 마치  \n",
+        "- 총 vs 검\n",
+        "- 피피티로 발표 vs 전지로 발표  \n",
+        "와도 같습니다. 쌓이는 데이터의 양이 많아지면 엑셀은 약 300MB만 되어도 파일을 여는 데에만 5분이 넘게 걸리거나, 렉이 걸리는 경우가 많습니다.  \n",
+        "그러나 판다스를 사용한다면 방대한 양의 데이터를 빠르게 확인하고 수정할 수 있습니다.  \n",
+        "- **파이썬 + 판다스 == 빅 데이터 사이언스**\n",
+        "\n",
+        "</br>\n",
+        "\n",
+        "## 😃 강사님이 생각하는 판다스란? 판다스를 배우면 좋은 이유는?  \n",
+        "\n",
+        "\n",
+        "```\n",
+        "\n",
+        "```\n",
+        "\n",
+        "</br>\n",
+        "\n",
+        "## 🌈 배워야 하는 내용\n",
+        "\n",
+        "-  어떻게 Pandas를 Import 하는지\n",
+        "\n",
+        "-  Pandas Series를 생성하고 분석해보기\n",
+        "\n",
+        "-  Pandas DataFrame를 생성하고 분석해보기\n",
+        "\n",
+        "-  Pandas DataFrame에 데이터 불러오기\n",
+        "\n",
+        "</br>\n",
+        "\n",
+        "## 💻 버전 관리\n",
+        "\n",
+        "* 참고 판다스 홈페이지 (https://pandas.pydata.org/)\n",
+        "\n",
+        "    Latest version: 1.0.1\n",
+        "\n",
+        "    Release date: Feb 05, 2020\n",
+        "\n",
+        "현재 사용자 환경에 판다스가 설치되어있지 않은 경우\n",
+        "* `pip install pandas=1.0.1`\n",
+        "\n",
+        "Anaconda를 사용하는 경우\n",
+        "* `conda install pandas=1.0.1`\n",
+        "\n",
+        "</br>\n",
+        "\n",
+        "## 💾 참고 자료\n",
+        "\n",
+        "https://pandas.pydata.org/docs/\n",
+        "\n",
+        "판다스 관련 활용 가능한 함수와 주요 인자에 대한 설명이 필요한 경우 참고해주세요.\n",
+        "\n",
+        "</br>\n",
+        "\n",
+        "## 🔍 모르는 것이 있을 때는?\n",
+        "\n",
+        "> Google 검색 엔진 \n",
+        "                \n",
+        "                 -> \"How to use Pandas\"\n",
+        "                 \n",
+        "                 -> \"판다스 사용법\"\n",
+        "                 \n",
+        "                 -> \"파이썬 데이터 프레임\"\n",
+        "                 \n",
+        "                 -> \"DataFrame in Python\"\n",
+        "\n",
+        "등의 키워드를 적극 활용해주세요! 데이터 사이언티스트로 자립하기💪💪\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "XRwqQZ5hMDOu"
+      },
+      "source": [
+        "# 📌 Step 0. 딕셔너리 자료형 배우기\n",
+        "\n",
+        "판다스를 배우기 전, 파이썬에서 딕셔너리란 무엇일까요? 단어 그대로 직역하면 📕사전이라는 뜻입니다.\n",
+        "\n",
+        "<img src = \"https://static.checkio.org/media/blog/share/dict.jpg\" width = \"500\">\n",
+        "\n",
+        "즉 \"apple\"이라는 단어에 \"사과\", \"banana\"라는 단어에 \"바나나\"라는 뜻이 매칭되어 있듯이 \n",
+        "\n",
+        "딕셔너리는 **Key**와 **Value**를 한 쌍으로 갖는 자료형입니다. 예컨대 **Key**가 **\"apple\"**이라면 **Value**는 **\"사과\"**가 될 것입니다.\n",
+        "\n",
+        "지난 시간 배운 리스트처럼 순차적으로(sequential) 해당 요솟값을 구하지 않고  \n",
+        "**Key**를 통해 **Value**를 얻는 다는 것. 이것이 바로 딕셔너리의 가장 큰 특징입니다.\n",
+        "\n",
+        " > 🔍 예시를 한번 살펴보겠습니다!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 136
+        },
+        "id": "Wq4GUBb2hsKt",
+        "outputId": "0488ac33-367c-4d2d-f8f6-546576ae0fce"
+      },
+      "source": [
+        "fruit_dict = ['apple':'사과', 'banana':'바나나']\n",
+        "fruit_dict = ['apple']"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "SyntaxError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"<ipython-input-5-8b694454909d>\"\u001b[0;36m, line \u001b[0;32m1\u001b[0m\n\u001b[0;31m    fruit_dict = ['apple':'사과', 'banana':'바나나']\u001b[0m\n\u001b[0m                         ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "v5lC5bQyJw1A"
+      },
+      "source": [
+        "dict_1 = { 'a' :'데이터', 'b':'다이빙', 'c': '3기', 'd': '파이팅!'}"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "eiz6muLb3hlz"
+      },
+      "source": [
+        "위의 딕셔너리 dict_1의 구성은 이렇게 될 것입니다.\n",
+        "\n",
+        "<img src = \"https://1.bp.blogspot.com/-5-SvX9hRJzM/XsuBgUdb3iI/AAAAAAAAAYc/L3uXG2I-GoAeEdmlwFDk7XpxjEteXdJSwCLcBGAsYHQ/s1600/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA%2B2020-05-25%2B%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE%2B5.27.00.png\" width = \"350\">"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0KeyqEhXyBRc",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "820697a0-65f4-4643-d29b-4ccea1a7d433"
+      },
+      "source": [
+        "print(dict_1)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "{'a': '데이터', 'b': '다이빙', 'c': '3기', 'd': '파이팅!'}\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xqtFqIWU86pz"
+      },
+      "source": [
+        "### Key 값을 통해서 Value 찾기\n",
+        "\n",
+        "List에서는 순차적으로 요솟값들을 찾는 것과 달리, \n",
+        "\n",
+        "`딕셔너리[key]`에서는 이런 식으로 Value를 찾습니다.\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fOliXU82-omi",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "outputId": "9d9fd306-405d-4a77-c4a3-eb6717dcb91f"
+      },
+      "source": [
+        "# 실행해보세요!\n",
+        "dict_1['a']"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            },
+            "text/plain": [
+              "'데이터'"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 6
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "WsJMX8_T-yHm",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "outputId": "7e0d9c71-f593-4a83-b493-9ac6c904007d"
+      },
+      "source": [
+        "# 실행해보세요!\n",
+        "dict_1['b']"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            },
+            "text/plain": [
+              "'다이빙'"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 7
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Z39VQJej-zV_"
+      },
+      "source": [
+        "# 실행해보세요!\n",
+        "dict_1['c']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "sdel8Wz3-1oC"
+      },
+      "source": [
+        "# 실행 결과는 무엇일까요?\n",
+        "dict_1['d']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ft7lQEgs_MNq"
+      },
+      "source": [
+        "### 딕셔너리의 함수들\n",
+        "\n",
+        "- `.keys()` : 딕셔너리에서 Key만 모아서 `dict_keys`를 만들어줍니다.\n",
+        "- `.values()` : 마찬가지로 Value만 얻고 싶을 경우 사용합니다.\n",
+        "- `.items()` : Key와 Value의 쌍을 묶은 형태로 반환해줍니다."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "J_5K7PDZAp4i",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "72cdcc65-7ded-46b5-dc62-229400af828a"
+      },
+      "source": [
+        "# .keys() 이용하기\n",
+        "dict_1.keys()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "dict_keys(['a', 'b', 'c', 'd'])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 8
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pxqFKizWye2Q",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b5a1ce43-b027-4c2c-aad1-43ed5dafd6e6"
+      },
+      "source": [
+        "list(dict_1.keys())"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['a', 'b', 'c', 'd']"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 9
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "GSNO6qJQBD-U",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "7f1a034b-58ff-46ba-e7c6-015ac5bdfcdb"
+      },
+      "source": [
+        "# 이렇게 사용할 수도 있어요\n",
+        "for i in dict_1.keys():\n",
+        " print(i)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "a\n",
+            "b\n",
+            "c\n",
+            "d\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XbPHZcSIBO57",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "cb70b550-0790-4824-8914-7577889a743e"
+      },
+      "source": [
+        "# 리스트로 바꿀 수도 있어요\n",
+        "list_1 = list(dict_1.keys())\n",
+        "print(list_1)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "['a', 'b', 'c', 'd']\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wSD3lG-WB9ra",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "afe38fd5-2542-4c99-ea0b-fd9ba1af028e"
+      },
+      "source": [
+        "# .values()\n",
+        "dict_1.values()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "dict_values(['데이터', '다이빙', '3기', '파이팅!'])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "GgSGkEVgCELS",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "22f7cbaa-e3b5-4bea-aea0-3c5eb4f766e4"
+      },
+      "source": [
+        "# .items()\n",
+        "dict_1.items()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "dict_items([('a', '데이터'), ('b', '다이빙'), ('c', '3기'), ('d', '파이팅!')])"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "sHdAkttzioq-"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "88sQq98ry4Xa"
+      },
+      "source": [
+        "\"\"\"\n",
+        "sing(...) # function, 함수\n",
+        "dict_1.sing() # method, 메소드;  클래스의 함수\n",
+        "\"\"\""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xtS6VTfuCNGh"
+      },
+      "source": [
+        "> 🔍 자신의 이름, 성명, 성별, 나이를 Key로 갖고 있는 딕셔너리를 만들어보세요!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Ucrb8J81Cb1g"
+      },
+      "source": [
+        "# 여기에!\n",
+        "dict_mine = {\n",
+        "    'first name': 'jiha',\n",
+        "    'last name': 'kim', \n",
+        "    'sex': 'man',\n",
+        "    'age': 26\n",
+        "}"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Ta3Hqvw0zZ8B",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "outputId": "5586ef44-caee-40d5-e9fd-6f8b269d1772"
+      },
+      "source": [
+        "dict_mine['first name']"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            },
+            "text/plain": [
+              "'jiha'"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 18
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "4ZMXNPjqgOLg"
+      },
+      "source": [
+        "# 📌 Step 1. Pandas import 하기"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "4hMEYi3W-X0y"
+      },
+      "source": [
+        ">  Pandas 패키지를 파이썬으로 불러오기 \n",
+        "- `as pd` 는 `pandas`를 사용자 지정으로 단어(`pd`)로 바꿔주는 코드입니다."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "yA8F8pmfgXfF"
+      },
+      "source": [
+        "import pandas as pd "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mmt3E_5_kDGz"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "vln0ECajgYiW"
+      },
+      "source": [
+        "# 📌 Step 2. Pandas Series를 생성하고 분석해보기\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8t3_uGlk_RJM"
+      },
+      "source": [
+        "## Pandas Series란?\n",
+        " 각각의 인덱스 값을 갖는 1차원 데이터 배열입니다.  \n",
+        "\n",
+        "![대체 텍스트](https://1.bp.blogspot.com/-3LGXA4kFrQs/XnxqYwQnOOI/AAAAAAAAAK8/IujzJYOVKI41vWv-e5_3zk4DCIccuyqDgCLcBGAsYHQ/s1600/1.JPG)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "n8UxGVU0AK0T"
+      },
+      "source": [
+        "## 데이터 생성 : Pandas Series 만들어보기"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "hRgGNmi0ARnC"
+      },
+      "source": [
+        "> 🔍 철수는 마트에서 필요한 식료품을 사려고 합니다. 마트로 출발하기 전에 Pandas Series를 이용해서 메모를 해두려고 하는데요.  \n",
+        "- 계란 30개, 사과 6개, 우유 1개, 빵은 사고 싶지만 다이어트를 위해 구매하지 않음 \n",
+        "- 1개만 사는 경우에는 'Yes', 구매하지 않으려는 경우에는 'No'로 표시  \n",
+        "- `pd.Series()`"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rLsggQX8kaCq"
+      },
+      "source": [
+        "#index : dict의 key, data: dict의 value"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Y602M5oAYltP",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "39bf1fe3-e118-4e5b-8eee-c8d859e2d43f"
+      },
+      "source": [
+        "groceries = pd.Series(index = ['eggs', 'apples', 'milk', 'bread'], data = [30, 6, 'Yes', 'No'])\n",
+        "\n",
+        "# Pandas Series는 어떻게 생겼을까요?\n",
+        "print(groceries)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "eggs       30\n",
+            "apples      6\n",
+            "milk      Yes\n",
+            "bread      No\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "g4cYF7Cukvy-",
+        "outputId": "0e31b212-8717-48cd-f2b5-82ef36cb2010"
+      },
+      "source": [
+        "#2nd\n",
+        "groceries = pd.Series({'eggs':30, 'apples':6, 'milk':'yes','bread':'NO'}) ##체크\n",
+        "print(groceries)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "eggs       30\n",
+            "apples      6\n",
+            "milk      yes\n",
+            "bread      NO\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "TQ4nxSCTYlwb",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "939431cd-5f6d-403b-b75b-bf9e08620c99"
+      },
+      "source": [
+        "# Pandas Series의 기초 정보\n",
+        "print('형태: ', groceries.shape)\n",
+        "print('차원:', groceries.ndim)\n",
+        "print('총 원소의 갯수:', groceries.size)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "형태:  (4,)\n",
+            "차원: 1\n",
+            "총 원소의 갯수: 4\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "EE1qLbOdu64S",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "8aa6a49d-0d93-4849-fcc8-953a4d63e877"
+      },
+      "source": [
+        "# Value와 Index\n",
+        "print('값:', groceries.values) # dictionary: dict_1.values()\n",
+        "print('인덱스:', groceries.index) # dictionary: dict_1.keys()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "값: [30 6 'Yes' 'No']\n",
+            "인덱스: Index(['eggs', 'apples', 'milk', 'bread'], dtype='object')\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "D8SywFVaE8yg"
+      },
+      "source": [
+        "## 데이터 탐색 : 인덱스 레이블을 통해 원소에 접근해보기  \n",
+        "- loc: 레이블명 또는 별명으로 정의된 인덱스를 바탕으로 접근\n",
+        "- iloc: 정수형 인덱스(순서)를 바탕으로 접근"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dyIu_Doseypg",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "08cac307-90e8-4024-b69c-41f4fb8e0adb"
+      },
+      "source": [
+        "# Q. 식료품점에서 사과를 몇 개 사야하는 걸까요?\n",
+        "print(groceries['apples'])"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "6\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6VkHURuehj82",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b4b9438e-593e-4aa4-8145-93a135a53631"
+      },
+      "source": [
+        "# Q. 식료품점에서 사과와 우유는 몇 개 사야하는 걸까요?\n",
+        "#print(groceries[???])\n",
+        "print(groceries[['apples', 'milk' ] ])\n",
+        "#첫번쨰 대괄호는 indexing\n",
+        "#두번쨰 대괄호는 list"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "apples      6\n",
+            "milk      Yes\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "WbHJ8bqahkYC",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "addccf69-c319-4743-8482-ca46adb5c10c"
+      },
+      "source": [
+        "# Q. 식료품점에서 사과와 우유는 몇 개 사야하는 걸까요? .loc[] 사용하기\n",
+        "print(groceries.loc[['apples','milk']])"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "apples      6\n",
+            "milk      Yes\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JiUA41l3hkba",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ecf02256-57f5-4864-e93f-6de7cc6dea5b"
+      },
+      "source": [
+        "# Q. 식료품점에서 사과와 우유는 몇 개 사야하는 걸까요? numerical indices 사용하기\n",
+        "print(groceries[[1,2]]) "
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "apples      6\n",
+            "milk      Yes\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "uvxQr93vhkel",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "f895be58-ff7f-43bb-f579-6dd63f788464"
+      },
+      "source": [
+        "# Q. 식료품점에서 사과와 우유는 몇 개 사야하는 걸까요? .iloc[] 사용하기\n",
+        "print(groceries.iloc[[1,2]]) "
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "apples      6\n",
+            "milk      Yes\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "DlYYDlpIIuTV"
+      },
+      "source": [
+        "## 데이터 수정 : Series 안의 원소를 변경하기"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Oopb4cwaIf4p"
+      },
+      "source": [
+        "> 🔍 식료품점에서 달걀을 30개에서 5개만 사기로 마음을 바꿨습니다. 어떻게 내용을 수정할 수 있을까요?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jaLEUYCkYly_",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b877a52b-1ff7-46e4-f10e-f2a8ddcbb033"
+      },
+      "source": [
+        "# 해당 인덱스 부분에 value를 덮어 씌워주면 됩니다.\n",
+        "groceries['eggs'] = 5\n",
+        "print(groceries)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "eggs        5\n",
+            "apples      6\n",
+            "milk      Yes\n",
+            "bread      No\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ZDyMmdOVJOH-"
+      },
+      "source": [
+        "## 데이터 삭제 : 특정 레이블을 제거하기"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "TvFaMLWeKvWt"
+      },
+      "source": [
+        "> 빵을 메모해두니, 철수는 빵이 계속 눈에 아른거려서 충동 구매할 것만 같습니다. 어떻게 내용을 삭제할 수 있을까요?\n",
+        "- `Series.drop(label)`"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "SDsgyNKhYl1N",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "a18bebae-a8f3-4f7c-ff68-edb3672d474e"
+      },
+      "source": [
+        "print(groceries.drop('bread'))"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "eggs       30\n",
+            "apples      6\n",
+            "milk      yes\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "o-IDlyIi2pVu",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "55070ad8-b706-4ff4-a53d-b4738918254a"
+      },
+      "source": [
+        "print(groceries)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "eggs       30\n",
+            "apples      6\n",
+            "milk      yes\n",
+            "bread      NO\n",
+            "dtype: object\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "_bGutyL1LLq2"
+      },
+      "source": [
+        "> `Series.drop(label)`만 적용하는 경우 무의식 속에 남아 완벽히 삭제되지 않았습니다.  \n",
+        "- `print()`를 통하여 삭제 여부를 확인해주세요. "
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "c6NhzKn1Km6n"
+      },
+      "source": [
+        "print(groceries)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "x2dzrth3LpjE"
+      },
+      "source": [
+        "> 완전히 삭제하기 위해서는 추가로 정의해주어야 할 것이 있습니다.  \n",
+        "- `inplace = True`"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CJzhpP16pP_o"
+      },
+      "source": [
+        "groceries.drop('milk', inplace=True)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "m7fP9zwBKnJt",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 226
+        },
+        "outputId": "a30bf3a5-9013-4518-d15e-38a6e14000a6"
+      },
+      "source": [
+        "groceries.drop('bread', implace)\n",
+        "\n",
+        "# Series.drop(label, inplace = True)를 적용하고 나니, 머릿 속에서 완전히 지워졌습니다.\n",
+        "print(groceries)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "NameError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-8-cb82f5116fe8>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mgroceries\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdrop\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'bread'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mimplace\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      2\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0;31m# Series.drop(label, inplace = True)를 적용하고 나니, 머릿 속에서 완전히 지워졌습니다.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      4\u001b[0m \u001b[0mprint\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mgroceries\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mNameError\u001b[0m: name 'implace' is not defined"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1u5il18sL8pT"
+      },
+      "source": [
+        "> 🔍 Pandas Series를 이용하여, 특정 스포츠 선수의 연봉을 비교해보겠습니다.  \n",
+        "- 단위는 '억'\n",
+        "- 류현진 선수 연봉 : 242억\n",
+        "- 손흥민 선수 연봉 : 110억\n",
+        "- 페이커 선수 연봉 : 30억\n",
+        "- `end = '\\n\\n'` : `print()` 함수 내에서 엔터를 두 번 실행하는 인자입니다."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vRFAeqvxYdzW",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "365258b3-5a38-4211-f68c-fd39e07ac818"
+      },
+      "source": [
+        "## Series 데이터를 생성하고 salary라는 변수에 저장합니다.\n",
+        "salary = pd.Series(index=['ryu', 'son', 'faker'], data=[242, 110, 30])\n",
+        "#salary = pd.Series(index=['ryu'])\n",
+        "print(salary)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "ryu      242\n",
+            "son      110\n",
+            "faker     30\n",
+            "dtype: int64\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_m7NKJkBBvde",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "3c55b064-f745-4ae0-b2b4-10beb4de1afd"
+      },
+      "source": [
+        "## Pandas Series에는 기초적인 연산도 가능합니다.\n",
+        "print(salary + 2, end = '\\n\\n')\n",
+        "print(salary - 2, end = '\\n\\n') \n",
+        "print(salary / 2, end = '\\n\\n')\n",
+        "print(salary // 2, end = '\\n\\n')"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "ryu      244\n",
+            "son      112\n",
+            "faker     32\n",
+            "dtype: int64\n",
+            "\n",
+            "ryu      240\n",
+            "son      108\n",
+            "faker     28\n",
+            "dtype: int64\n",
+            "\n",
+            "ryu      121.0\n",
+            "son       55.0\n",
+            "faker     15.0\n",
+            "dtype: float64\n",
+            "\n",
+            "ryu      121\n",
+            "son       55\n",
+            "faker     15\n",
+            "dtype: int64\n",
+            "\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "04uV1gXXBvnB",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "103cd793-fc07-4cf5-f9f9-8a9a04fca51d"
+      },
+      "source": [
+        "## 그러나 위의 연산들은 원래의 데이터에 영향을 주지 못합니다.\n",
+        "print(salary)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "ryu      242\n",
+            "son      110\n",
+            "faker     30\n",
+            "dtype: int64\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ncbRkTRGBsLv"
+      },
+      "source": [
+        "> 당연하게도, Pandas Series의 개별 원소에도 기초적인 연산이 가능합니다."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "PqUSm23RNWUE",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b6bc63e1-4beb-44e3-f9c7-cdbcb64f9e03"
+      },
+      "source": [
+        "print('페이커는 중국에서 100억을 제안받은 적이 있다.')\n",
+        "print(salary['faker'] + 70)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "페이커는 중국에서 100억을 제안받은 적이 있다.\n",
+            "100\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Ga3YMdkCCP3G"
+      },
+      "source": [
+        ">그러나 이 역시도 원래 데이터에 영향을 주지는 않습니다.  \n",
+        "💰30억을 받고 있는 건 사실이니까요!!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "q1eewV8ICQMK",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "79556f47-4cfe-454f-b879-37c6c0bdb458"
+      },
+      "source": [
+        "print(salary)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "ryu      242\n",
+            "son      110\n",
+            "faker     30\n",
+            "dtype: int64\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "7WWUekKLOEHW"
+      },
+      "source": [
+        "> 그러나, 페이커가 SKT로부터 인센티브 20억을 더 받고 있다는 것이 기정 사실로 된다면?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8QVk0LM4N_ty",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "8d471873-41d9-4b1e-c734-8f641d210bd6"
+      },
+      "source": [
+        "## 원래 데이터를 수정하는 방법\n",
+        "# salary['faker'] = salary['faker'] + 20\n",
+        "salary['faker'] += 20\n",
+        "\n",
+        "## 페이커의 연봉이 50억으로 수정이 되었습니다.\n",
+        "print(salary)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "ryu      242\n",
+            "son      110\n",
+            "faker     50\n",
+            "dtype: int64\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "EHDCHdw3omqN"
+      },
+      "source": [
+        "import matplotlib.pyplot as plt"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 297
+        },
+        "id": "jBPm42QbotHx",
+        "outputId": "6ebcc03f-1dbe-4795-ebbb-f97beaea4ee6"
+      },
+      "source": [
+        "salary.plot.bar()\n",
+        "plt.title(\"salary\")\n",
+        "plt.show()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "iVBORw0KGgoAAAANSUhEUgAAAXcAAAEYCAYAAACnYrZxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAAQzklEQVR4nO3de7BdZX3G8e/DRayKis0xgxAMYkBRK2qKOjotQi23zgD9g4GqIMM0XqDUqp0i0yrjDIodL1NrRUOhBpVr1UqFVhF1HK23xAtXKVFDIRMglBYQFJvw6x97RTeHc3Ku+6zkzfczs2ev9a7bb7OHJ+9512WnqpAktWWnvguQJM0/w12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuzROkkry7L7rkObCcJekBhnu0jxJskvfNUhbGO5qWpK/SrI+yQNJbklyWJKDk3wryf8m2ZDkI0keN8n2Ryf5QZL7k9ye5OyhZUu7IZxTk/wX8JUkVyX5s3H7uC7JcaP9pNKjGe5qVpIDgNOB362q3YHDgXXAZuAvgEXAy4HDgDdPspsHgZOApwJHA29Kcuy4dX4feG63/1XAa4dqeCGwF3DVvHwoaZoMd7VsM7AbcGCSXatqXVX9pKrWVNW3q2pTVa0DPs4goB+jqr5WVddX1SNVdR1wyQTrnl1VD1bVL4Argf2TLOuWvQ64rKp+NYoPKE3GcFezqmot8BbgbODuJJcmeUaS/ZN8IcmdSe4H3sOgF/8YSV6a5KtJNia5D3jjBOvePnTMXwKXAa9NshNwIvDJef9w0hQMdzWtqi6uqlcCzwQKeB9wHvBjYFlVPRk4C8gku7iYQW98SVU9BfjYBOuOf7TqKuA1DIZ7Hqqqb83HZ5FmwnBXs5IckOTQJLsBvwR+ATwC7A7cD/w8yXOAN21lN7sD91bVL5McDPzJVMftwvwR4APYa1dPDHe1bDfgXOAe4E7g6cA7gLczCOkHgPMZDKNM5s3Au5M8ALwTuHyax74IeAHwqVlVLs1R/LEOaf4lOQlY0Q0JSQvOnrs0z5I8gUGPf2XftWjHZbhL8yjJ4cBG4C4GJ2OlXjgsI0kNsucuSQ0y3CWpQVM+xS7JEgaXdS1mcLPGyqr6u+4BSn/KYHwR4Kyqurrb5h3AqQxu/z6jqr64tWMsWrSoli5dOtvPIEk7pDVr1txTVWMTLZvOI0o3AW+rqu8n2R1Yk+SabtmHqur9wysnORA4AXge8Azgy0n2r6rNkx1g6dKlrF69ejqfRZLUSXLbZMumHJapqg1V9f1u+gHgZgZPuZvMMcClVfVwVf0MWAscPLOSJUlzMaMx9yRLgRcB3+maTu+eVX1hkj26tr0YepAScAcT/GOQZEWS1UlWb9y4cfxiSdIcTDvckzwJ+Azwlqq6n8HDl/YDDgI2MHiOxrRV1cqqWl5Vy8fGJhwykiTN0rTCPcmuDIL901X1WYCququqNlfVIwyez7Fl6GU9sGRo8727NknSApky3JMEuAC4uao+ONS+59BqxwE3dNNXAick2S3JvsAy4LvzV7IkaSrTuVrmFQx+Teb6JD/s2s4CTkxyEIPLI9cBbwCoqhuTXA7cxOBKm9O2dqWMJGn+TRnuVfUNJv4hg6u3ss05wDlzqEuSNAfeoSpJDZrOsExzlp7Z9g/Rrzv36L5LkNQze+6S1CDDXZIaZLhLUoMMd0lqkOEuSQ0y3CWpQYa7JDXIcJekBhnuktQgw12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuyQ1yHCXpAYZ7pLUIMNdkhpkuEtSgwx3SWqQ4S5JDTLcJalBhrskNchwl6QGGe6S1CDDXZIaZLhLUoMMd0lqkOEuSQ0y3CWpQYa7JDVoynBPsiTJV5PclOTGJH/etT8tyTVJbu3e9+jak+TDSdYmuS7Ji0f9ISRJjzadnvsm4G1VdSDwMuC0JAcCZwLXVtUy4NpuHuBIYFn3WgGcN+9VS5K2aspwr6oNVfX9bvoB4GZgL+AYYFW32irg2G76GOCiGvg28NQke8575ZKkSc1ozD3JUuBFwHeAxVW1oVt0J7C4m94LuH1oszu6NknSApl2uCd5EvAZ4C1Vdf/wsqoqoGZy4CQrkqxOsnrjxo0z2VSSNIVphXuSXRkE+6er6rNd811bhlu697u79vXAkqHN9+7aHqWqVlbV8qpaPjY2Ntv6JUkTmM7VMgEuAG6uqg8OLboSOLmbPhn4/FD7Sd1VMy8D7hsavpEkLYBdprHOK4DXAdcn+WHXdhZwLnB5klOB24Dju2VXA0cBa4GHgFPmtWJJ0pSmDPeq+gaQSRYfNsH6BZw2x7okSXPgHaqS1CDDXZIaZLhLUoMMd0lqkOEuSQ0y3CWpQYa7JDXIcJekBhnuktQgw12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuyQ1yHCXpAYZ7pLUIMNdkhpkuEtSgwx3SWqQ4S5JDTLcJalBhrskNchwl6QGGe6S1CDDXZIaZLhLUoMMd0lqkOEuSQ0y3CWpQYa7JDXIcJekBhnuktQgw12SGjRluCe5MMndSW4Yajs7yfokP+xeRw0te0eStUluSXL4qAqXJE1uOj33TwBHTND+oao6qHtdDZDkQOAE4HndNh9NsvN8FStJmp4pw72qvg7cO839HQNcWlUPV9XPgLXAwXOoT5I0C3MZcz89yXXdsM0eXdtewO1D69zRtUmSFtBsw/08YD/gIGAD8IGZ7iDJiiSrk6zeuHHjLMuQJE1kVuFeVXdV1eaqegQ4n98MvawHlgytunfXNtE+VlbV8qpaPjY2NpsyJEmTmFW4J9lzaPY4YMuVNFcCJyTZLcm+wDLgu3MrUZI0U7tMtUKSS4BDgEVJ7gDeBRyS5CCggHXAGwCq6sYklwM3AZuA06pq82hKlyRNZspwr6oTJ2i+YCvrnwOcM5eiJElz4x2qktQgw12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuyQ1yHCXpAYZ7pLUIMNdkhpkuEtSgwx3SWqQ4S5JDTLcJalBhrskNchwl6QGGe6S1CDDXZIaZLhLUoMMd0lqkOEuSQ0y3CWpQYa7JDXIcJekBhnuktQgw12SGmS4S1KDDHdJapDhLkkN2qXvAqSZWnrmVX2XMFLrzj267xLUAHvuktQgw12SGmS4S1KDDHdJatCU4Z7kwiR3J7lhqO1pSa5Jcmv3vkfXniQfTrI2yXVJXjzK4iVJE5tOz/0TwBHj2s4Erq2qZcC13TzAkcCy7rUCOG9+ypQkzcSU4V5VXwfuHdd8DLCqm14FHDvUflENfBt4apI956tYSdL0zHbMfXFVbeim7wQWd9N7AbcPrXdH1yZJWkBzPqFaVQXUTLdLsiLJ6iSrN27cONcyJElDZhvud20Zbune7+7a1wNLhtbbu2t7jKpaWVXLq2r52NjYLMuQJE1ktuF+JXByN30y8Pmh9pO6q2ZeBtw3NHwjSVogUz5bJsklwCHAoiR3AO8CzgUuT3IqcBtwfLf61cBRwFrgIeCUEdQsSZrClOFeVSdOsuiwCdYt4LS5FiVJmhvvUJWkBhnuktQgw12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuyQ1yHCXpAYZ7pLUIMNdkhpkuEtSgwx3SWqQ4S5JDTLcJalBhrskNchwl6QGGe6S1CDDXZIaZLhLUoMMd0lqkOEuSQ0y3CWpQYa7JDXIcJekBhnuktQgw12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuyQ1yHCXpAYZ7pLUoF3msnGSdcADwGZgU1UtT/I04DJgKbAOOL6q/mduZUqSZmI+eu6vqqqDqmp5N38mcG1VLQOu7eYlSQtoFMMyxwCruulVwLEjOIYkaSvmGu4FfCnJmiQrurbFVbWhm74TWDzHY0iSZmhOY+7AK6tqfZKnA9ck+fHwwqqqJDXRht0/BisA9tlnnzmWIWl7sPTMq/ouYaTWnXt03yX82px67lW1vnu/G/gccDBwV5I9Abr3uyfZdmVVLa+q5WNjY3MpQ5I0zqzDPckTk+y+ZRr4Q+AG4Erg5G61k4HPz7VISdLMzGVYZjHwuSRb9nNxVf17ku8Blyc5FbgNOH7uZUqSZmLW4V5VPwVeOEH7fwOHzaUoSdLceIeqJDXIcJekBhnuktQgw12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuyQ1yHCXpAYZ7pLUIMNdkhpkuEtSgwx3SWqQ4S5JDTLcJalBhrskNchwl6QGGe6S1CDDXZIaZLhLUoMMd0lqkOEuSQ0y3CWpQYa7JDXIcJekBhnuktQgw12SGmS4S1KDDHdJapDhLkkNMtwlqUGGuyQ1yHCXpAaNLNyTHJHkliRrk5w5quNIkh5rJOGeZGfgH4AjgQOBE5McOIpjSZIea1Q994OBtVX106r6FXApcMyIjiVJGmeXEe13L+D2ofk7gJcOr5BkBbCim/15kltGVMu2YBFwz0IdLO9bqCPtMPz+tl+tf3fPnGzBqMJ9SlW1EljZ1/EXUpLVVbW87zo0O35/268d+bsb1bDMemDJ0PzeXZskaQGMKty/ByxLsm+SxwEnAFeO6FiSpHFGMixTVZuSnA58EdgZuLCqbhzFsbYTO8TwU8P8/rZfO+x3l6rquwZJ0jzzDlVJapDhLkkNMtwlqUGGu6QmJNkpyfF917Gt8ITqiCR550TtVfXuha5FM5Nkf+AvGdz99+sryqrq0N6K0rTsyDctjdfbHao7gAeHph8P/BFwc0+1aGauAD4GnA9s7rkWzcyXk7wduIyh/wer6t7+SuqHPfcFkmQ34ItVdUjftWjrkqypqpf0XYdmLsnPJmiuqnrWghfTM3vuC+cJDB7DoG3fvyZ5M/A54OEtjTti7297U1X79l3DtsKe+4gkuR7Y8h93Z2AMeHdVfaS/qjQd9v62X0meALwV2KeqViRZBhxQVV/oubQFZ7iPSJLhR3FuAu6qqk191SPtCJJcBqwBTqqq53dh/x9VdVDPpS04L4UcnTOAJ1bVbVW13mDffiTZNckZSf65e52eZNe+69K07FdVfwv8H0BVPQSk35L6YbiPzs3A+Um+k+SNSZ7Sd0GatvOAlwAf7V4v6dq07ftVkt+iGxJNsh9D5012JA7LjFiSA4BTgBOBbwLnV9VX+61KW5PkR1X1wqnatO1J8mrgrxn8dvOXgFcAr6+qr/VZVx/suY9Q90Phz+le9wA/At6a5NJeC9NUNnc9PgCSPAuvd99erAH+GHg9cAmwHLitz4L6Ys99BJIE+Efg94CvABdU1XeHlt9SVQf0VZ+2LsmhwCeAn3ZNS4FT/Itr25fkm8CRVXV/N/9c4Iqqen6/lS08r3MfgaqqJCcCi7oTOuMdvNA1aUZ+G3g+g1A/Fng5cF+fBWna3sPgPoWjGPzFfBHwmn5L6ofhPjpXAM9j8JODj1JVBsW27W+q6ookTwZeBbyfwQnVl/ZblqZSVVd1VzZdA+wOHFdV/9lzWb1wWGZEkvwYeDaD8b4HGVyOVVX1O70Wpikl+UFVvSjJe4Hrq+riLW1916aJJfl7fnPTIMBhwE+AdQBVdUYPZfXKnvvoHN53AZq19Uk+DrwaeF/3XCAvPti2rR43v6aXKrYh9tylcbq7Go9g0Gu/NcmewAuq6ks9lyZNm+EuqRnds2Tey+A698dvad8Rnwvkn5qSWvJPDE5+b2JwMvwi4FO9VtQTe+6SmrHlWfxJrq+qFwy39V3bQvOEqqSWPJxkJ+DWJKcD64En9VxTLxyWkbTdS/LJbvJfGPwwzhkMHvj2OuDkvurqk8MykrZ7SW4C/gD4N+AQxj3md0f8FS2HZSS14GPAtcCzGFzjHgY3NW153+GulrHnLqkZSc6rqjf1Xce2wHCXpAZ5QlWSGmS4S1KDDHdJapDhLkkNMtwlqUH/DymgTyhEIHAsAAAAAElFTkSuQmCC\n",
+            "text/plain": [
+              "<Figure size 432x288 with 1 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": [],
+            "needs_background": "light"
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 285
+        },
+        "id": "yMJbNsk6oZik",
+        "outputId": "5f710b15-dfd9-4502-baf8-423baa41bfa1"
+      },
+      "source": [
+        "salary.plot()"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<matplotlib.axes._subplots.AxesSubplot at 0x7fb39a706cf8>"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 13
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": [
+              "<Figure size 432x288 with 1 Axes>"
+            ]
+          },
+          "metadata": {
+            "tags": [],
+            "needs_background": "light"
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "PS213FkEqs8x"
+      },
+      "source": [
+        "# 📌 Step 3. DataFrame을 생성하고 분석해보기\n",
+        "\n",
+        "pd.Series로 모든 데이터를 분석하는 것은 한계가 있습니다.\n",
+        "\n",
+        "아래와 같이 인덱스 레이블(행)의 속성(열)이 2개 이상인 경우가 있기 때문입니다.\n",
+        "\n",
+        "<img src=\"https://1.bp.blogspot.com/-284EVWGL1oQ/XnxqZvDNdSI/AAAAAAAAALI/KPhtO_Se_7oKvW3k4YYntPmYWXQETkjGQCLcBGAsYHQ/s1600/2.JPG\" width = \"800\">\n",
+        "\n",
+        "> 🔍 이러한 경우에는 어떻게 해야 할까요? 아래의 예시를 통해 배워보도록 하겠습니다.\n",
+        "> - 철수와 영희가 같이 식료품을 사러 마트에 가기로 함\n",
+        "> - 철수는 사과와 계란, 영희는 우유와 빵을 사는 것으로 임무를 분담\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ZiuvYIL_n-sN"
+      },
+      "source": [
+        "# 마찬가지로 pandas 패키지를 import 합니다(앞에서 불러왔으면 최초 1회만 불러오면 됩니다)\n",
+        "# import pandas as pd # cmd+/   windows: ctrl+/ : 주석처리 \n",
+        "\n",
+        "# 두개의 pd.Series를 생성합니다\n",
+        "# index는 구매할 품목, data는 구매할 갯수 \n",
+        "items = {\n",
+        "    '철수': pd.Series(data = [30, 6], index = ['eggs', 'apples']),\n",
+        "    '영희': pd.Series(data = ['5', \"2\"], index = ['milk', 'bread'])}\n",
+        "\n",
+        "print(items)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Df72Kh1s5sM5"
+      },
+      "source": [
+        "items['영희']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "t6uw6xMERfDD"
+      },
+      "source": [
+        "> 위와 같이 열이 2개 이상인 데이터를 비교하려니 지저분해져서 보기에 불편합니다 😡"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "e6VhTrxwRuta"
+      },
+      "source": [
+        "## DataFrame이란?\n",
+        "\n",
+        "두 개 이상의 Series가 모여 생성되는 테이블 형태의 2차원 데이터입니다.\n",
+        "\n",
+        "![대체 텍스트](https://1.bp.blogspot.com/-NkPRfZJSEo4/XnxqZ-y433I/AAAAAAAAALM/P1808veHezQ7QY3g6amtQDOo8dYSCB7vgCLcBGAsYHQ/s1600/3.JPG)\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "KXgsYzcjThg2"
+      },
+      "source": [
+        "> 🔍 위에서 만든 `items`에 `pd.DataFrame`를 사용해보세요!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BNBSF3XEsVBZ"
+      },
+      "source": [
+        "df_items = ???\n",
+        "\n",
+        "# 각 레이블(행)마다 2개의 속성(열)을 지니는 DataFrame이 생성되었습니다.\n",
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "c1o9BUYmUx9c"
+      },
+      "source": [
+        "DataFrame도 똑같이 기초 정보(형태, 차원, 원소의 개수 등)를 구할 수 있습니다.\n",
+        "> - `데이터 변수.shape` : 형태를 알 수 있음\n",
+        "- `데이터 변수.ndim`: 차원을 알 수 있음\n",
+        "- `데이터 변수.size` : 원소의 개수"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "SqC1H36WssUH"
+      },
+      "source": [
+        "# Pandas DataFrame의 기초 정보\n",
+        "print('형태: ', df_items.???)\n",
+        "print('차원:', df_items.???)\n",
+        "print('총 원소의 갯수:', df_items.???)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-b_Ww4NKDcRr"
+      },
+      "source": [
+        "> - `데이터 변수.values`\n",
+        "- `데이터 변수.index`\n",
+        "- `데이터 변수.columns`"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7FLonx9-DgeC"
+      },
+      "source": [
+        "# Value와 Index\n",
+        "print('값:', df_items.???)\n",
+        "print('인덱스:', df_items.???)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6lLpE1J1DgkK"
+      },
+      "source": [
+        "# 이제는 column이 2개 이상이니까, 열의 개수도 파악해두어야 합니다.\n",
+        "print('열의 이름:', df_items.columns)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Nx1-lmV0VNFp"
+      },
+      "source": [
+        "## 데이터 프레임 탐색\n",
+        "\n",
+        "데이터 프레임에서 특정 행과 특정 열만 불러올 수 있습니다.  \n",
+        "\n",
+        "> 철수의 쇼핑 리스트만 불러오는 다양한 방법  \n",
+        "- Column(철수)를 기준으로 탐색"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bMSBWmZOtPGw"
+      },
+      "source": [
+        "# 첫 번째 방법\n",
+        "cheol_list = pd.DataFrame(items, columns = ['철수'])\n",
+        "print(cheol_list)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "prjPEu7vD8cb"
+      },
+      "source": [
+        "# 두 번째 방법 - 두 개 이상의 열에 접근할 때는 사용할 수 없어서 추천하지 않는 방식입니다.\n",
+        "# cheol_list = df_items['철수', '영희'] -> 이렇게 사용할 수 없음\n",
+        "cheol_list = ???\n",
+        "print(cheol_list)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dp8rn_MnD8fs"
+      },
+      "source": [
+        "# 세 번째 방법 - 두 개 이상의 열에 접근 가능 [['철수', '영희']] 이런 식으로\n",
+        "cheol_list = ???\n",
+        "print(cheol_list)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "UHKFKBpoXDQu"
+      },
+      "source": [
+        "> 계란을 누가, 몇 개 샀는지 확인해보는 다양한 방법  \n",
+        "- index(계란)를 기준으로 탐색"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mtGgPDrYzsA_"
+      },
+      "source": [
+        "# 계란을 누가, 몇 개 샀는지 확인하는 첫 번째 방법\n",
+        "about_egg = pd.DataFrame(items, index = ['eggs'], columns = ['철수', '영희'])\n",
+        "print(about_egg)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "uZTVAlOrEB6Z"
+      },
+      "source": [
+        "# 계란을 누가, 몇 개 샀는지 확인하는 두 번째 방법\n",
+        "about_egg = ???\n",
+        "print(about_egg)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xErzBv4UEB-1"
+      },
+      "source": [
+        "# 계란을 누가, 몇 개 샀는지 확인하는 세 번째 방법 - 두 개 이상 접근 가능한 방법\n",
+        "about_egg = ??? # index 안에 list를 넣어야 한다..\n",
+        "print(about_egg)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iDj2hZ_gvf_h"
+      },
+      "source": [
+        "# 철수가 계란을 몇 개 샀는지 확인하는 방법\n",
+        "cheol_egg = df_items['철수']['eggs'] \n",
+        "cheol_egg"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "dwUqjP6OaB71"
+      },
+      "source": [
+        "## 🔧**데이터 프레임 수정**\n",
+        "⭐이제 새로운 열 추가 또는 새로운 행 추가를 해보도록 하겠습니다  \n",
+        "⭐데이터 프레임이 원본에서 변화해가는 모습을 전후로 비교하며 학습해주세요  \n",
+        "\n",
+        "> 민수와 광수도 같이 마트에 가려고 합니다. \n",
+        " - 민수와 광수는 사과만 5개 살 예정\n",
+        " - 그러나 광수는 갈지 말지 고민 중"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "yVlhOQ3fzwzo"
+      },
+      "source": [
+        "# 원본을 먼저 확인합니다\n",
+        "print(df_items)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "5bjPryB91wAf"
+      },
+      "source": [
+        "### **열추가**\n",
+        "> 민수가 장을 볼 리스트(민수열)를 만들고 추가하는 방법입니다.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zNAYd6MG0fz9"
+      },
+      "source": [
+        "# '민수열' 만들기\n",
+        "minsu_list = ???      # Series 데이터 만들기\n",
+        "minsu_list = ???       # 데이터 프레임화"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "LVTr26bb8Bvh"
+      },
+      "source": [
+        "minsu_list"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5GBV2ScZFNos"
+      },
+      "source": [
+        "# 만든 '민수열'을 기존 데이터 프레임에 추가하기 \n",
+        "df_items['민수'] = ???\n",
+        "print(df_items)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Q9xkTfPq3hPP"
+      },
+      "source": [
+        "> 광수도 뒤늦게 합류하기로 하였습니다. \n",
+        " - 사전에 '광수열'을 만들지 않고 데이터 프레임에 직접 추가하는 방법"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MhFrltqL2lRw"
+      },
+      "source": [
+        "df_items.???    # Series 데이터를 만들지 않아도 됩니다."
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "u_aR9vN68lkI"
+      },
+      "source": [
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "roE54dCQFUuF"
+      },
+      "source": [
+        "> 🔍 예제 : 원하는 방법으로 자신의 이름의 열을 추가해보세요(쇼핑 목록은 자율!)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xJG2JfkVFZmd"
+      },
+      "source": [
+        "# 여기에\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9TRoQCd48y9D"
+      },
+      "source": [
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "X13VBqtr9t7C"
+      },
+      "source": [
+        "### **행추가**\n",
+        "> 철수와 영희는 생선을 각각 🐟🐟 2마리씩 추가로 사려고 합니다. 민수는 구매하지 않습니다."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CTizzD698NEZ"
+      },
+      "source": [
+        "fishes = [{'철수': 2, '영희':2, '민수':0}]\n",
+        "fishes = pd.DataFrame(fishes, index = ['fishes'])\n",
+        "fishes"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zNVNdVoT9M-z"
+      },
+      "source": [
+        "# '생선' 행을 기존 데이터 프레임에 추가하기\n",
+        "df_items = df_items.???    # list와 같이 .append()로 추가할 수 있습니다\n",
+        "print(df_items)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-fRrHQUFGFAV"
+      },
+      "source": [
+        "> 🔍 예제 : 지금 가장 생각나는 음식의 행을 추가해보세요!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "42nuRiCCGFJW"
+      },
+      "source": [
+        "# 여기에\n",
+        "df_items = ???"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "llIlxjmT9iwz"
+      },
+      "source": [
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "VqifcwvCBzJj"
+      },
+      "source": [
+        "###🗑**데이터 프레임 삭제**\n",
+        "광수는 결국 가지 않기로 했습니다..... (이 녀석이...😭)\n",
+        "> 데이터 프레임에서 '광수열'을 삭제합니다  \n",
+        " - `.pop()` : 데이터 프레임에서 원하는 열을 삭제하고 돌려주는 함수, 열을 지정하지 않으면 마지막 열을 삭제합니다."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Wa_1vniv9K7_"
+      },
+      "source": [
+        "# 여기에\n",
+        "df_items.???\n",
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "cBpQilrbEXnJ"
+      },
+      "source": [
+        "광수가 초를 쳐서 결국 철수도 가는 것을 포기했습니다\n",
+        "> 데이터 프레임에서 '철수열'을 삭제합니다  \n",
+        "- `.drop()`\n",
+        "- axis = 0 은 행(index), axis = 1 은 열(column)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NpgzumLB99NS"
+      },
+      "source": [
+        "df_items.drop(labels='철수',  axis=1)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3YP0TJiY-E2F"
+      },
+      "source": [
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XeChY73n9Xqj"
+      },
+      "source": [
+        "df_items.???   # 해석 : '철수'라는 열을 삭제\n",
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "CVaFGCqgFRGu"
+      },
+      "source": [
+        "### 이름 바꾸기\n",
+        "행 또는 열의 이름을 바꿔보도록 하겠습니다.\n",
+        "> 열의 이름을 변경하는 경우 : `데이터프레임명.rename(columns = {'기존 이름' : '바뀌는 이름'})`  \n",
+        "> 행의 이름을 변경하는 경우 : `데이터프레임명.rename(index = {'기존 이름' : '바뀌는 이름'})`"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1Dms_UFk9uVx"
+      },
+      "source": [
+        "df_items = df_items.???\n",
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "TXh9JQ90-gV0"
+      },
+      "source": [
+        "df_items = df_items.???\n",
+        "df_items"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "d9sfM_QBHPEo"
+      },
+      "source": [
+        " 🔍예제 : 자신이 추가했던 열의 이름 앞에 '데이터 사이언티스트'라는 수식어를 추가해보세요!\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oHWeaEE7HPN5"
+      },
+      "source": [
+        "# 여기에\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "3aNjeAgIHhlC"
+      },
+      "source": [
+        "🎉🎉🎉 데이터 사이언티스트가 된 것을 축하드립니다 🎉🎉🎉"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "_Je8GTJ3HX8r"
+      },
+      "source": [
+        "## 결측값 관리\n",
+        "🔎표 작성 결과를 보니 결측값(NaN)이 너무 많이 보여서 지저분합니다.\n",
+        "> 현황 확인해보기  \n",
+        " - `isnull()`\n",
+        " - True는 결측값 (NaN), False는 데이터 값이 존재함을 나타냄"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tz-oGdSJ9-EM"
+      },
+      "source": [
+        "df_items.???"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4QZKzJLq_Z77"
+      },
+      "source": [
+        "# Q. NaN가 하나라도 포함된 행이면 삭제하는 코드\n",
+        "df_items.???"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zdw7xkVu_uhp"
+      },
+      "source": [
+        "# Q. NaN가 하나라도 포함된 열이면 삭제하는 코드\n",
+        "df_items.???"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "WN5gvi0oJmUH"
+      },
+      "source": [
+        "무조건 지우니까 남아있는 데이터가 없게 되니 0으로 대체 해보겠습니다!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mycLuNJEAGSc"
+      },
+      "source": [
+        "df_items.fillna(0)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "WzBZEAF0A9nZ"
+      },
+      "source": [
+        "# 📌 Step 4. 외부 데이터를 Pandas DataFrame으로 불러오기 \n",
+        "\n",
+        "이번에는 외부의 데이터를 불러와 활용하는 법을 배워보도록 하겠습니다.  \n",
+        "> 먼저, '🐬데이터 다이빙🐬' 여러분들을 위해서 준비한 캐글의 타이타닉 데이터셋을 현재 Colab 파일과 같은 폴더에 넣어주세요!  \n",
+        "> - Notion 맨 아래 'titanic_train.csv'  \n",
+        "> - Error가 뜬다면 현재 경로설정이 제대로 되어있는지 확인해주세요\n",
+        "\n",
+        "</br>\n",
+        "\n",
+        "### Colab과 Google Drive 연동하기\n",
+        "\n",
+        "구글 코랩 환경에서는 본인의 구글 계정이 소유하고 있는 '구글 드라이브'와의 연동을 지원합니다.  \n",
+        "연동하는 경우, 자신의 구글 드라이브를 로컬 환경처럼 활용이 가능하며, 원하는 파일이나 이미지를 불러올 수 있습니다. \n",
+        "\n",
+        "<br/>\n",
+        "\n",
+        "### Google Drive 패키지와 os 모듈 불러오기\n",
+        "\n",
+        "``` python \n",
+        "from google.colab import drive\n",
+        "import os\n",
+        "``` \n",
+        "<br>\n",
+        "\n",
+        "### 본인 구글 드라이브의 최초 경로를 설정하기\n",
+        "\n",
+        "``` python\n",
+        "# 대부분의 구글 드라이브 최초 경로는 아래와 같습니다. \n",
+        "# 예외 발생 시 본인의 구글 드라이브에 접속하여 content 폴더나 gdrive 폴더가 어떤 위치에 있으며, \n",
+        "# 자신이 연결하려는 폴더까지의 경로가 어떻게 되는지 확인해야 합니다.  \n",
+        "drive.mount('/content/gdrive/')\n",
+        "``` \n",
+        "\n",
+        "<img src = \"https://1.bp.blogspot.com/-UdgK4XrzJ6k/XoRD6CTlL-I/AAAAAAAAAQY/GptZSn3vxHwoTGE0mOpaJVJWLRQYZdaeQCLcBGAsYHQ/s1600/%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B3%25E1%2584%2585%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2589%25E1%2585%25A3%25E1%2586%25BA%2B2020-04-01%2B%25E1%2584%258B%25E1%2585%25A9%25E1%2584%2592%25E1%2585%25AE%2B4.29.05.png\" width = \"800\" >\n",
+        "\n",
+        "<br/>\n",
+        "<br/>\n",
+        "\n",
+        "### 자신의 현재 경로를 파악하기\n",
+        "\n",
+        "``` python\n",
+        "os.getcwd()\n",
+        "``` \n",
+        "<br/>\n",
+        "\n",
+        "### 현재 작업 환경 설정하기 (불러오려는 파일이 있는 폴더로 경로 설정)\n",
+        "\n",
+        "``` python\n",
+        "os.chdir('/content/gdrive/My Drive/Colab Notebooks ~ 내 폴더 및 경로')\n",
+        "``` \n",
+        "\n",
+        "아마 대부분의 경우, **My Drive** 까지의 경로는 동일할 것입니다.\n",
+        "이후의 경로는 불러오려는 파일이 있는 경로로 연결해주면 됩니다. "
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cVQu-lbQN9w9",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "f81a6412-23e1-4470-e115-70dde1732df6"
+      },
+      "source": [
+        "from google.colab import drive    # Google Drive 패키지 불러오기\n",
+        "drive.mount('/content/gdrive/') #우리의 구글 드라이브 최상단 경로\n",
+        "\n",
+        "# 아래 모듈 불러오기\n",
+        "import time\n",
+        "import os\n",
+        "import pandas as pd  \n",
+        "import re\n",
+        "\n",
+        "os.chdir('/content/gdrive/My Drive/Colab Notebooks/datascience')"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Mounted at /content/gdrive/\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ScPyRBIxBSBJ",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 419
+        },
+        "outputId": "192cde64-caf0-4dad-d72c-99759b61dbae"
+      },
+      "source": [
+        "# 캐글의 타이타닉 데이터셋 가져오기 \n",
+        "titanic_df = pd.read_csv('/content/gdrive/My Drive/Colab Notebooks/datascience/titanic_train.csv')     # 현재 작업 환경 경로 기준\n",
+        "titanic_df"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>PassengerId</th>\n",
+              "      <th>Survived</th>\n",
+              "      <th>Pclass</th>\n",
+              "      <th>Name</th>\n",
+              "      <th>Sex</th>\n",
+              "      <th>Age</th>\n",
+              "      <th>SibSp</th>\n",
+              "      <th>Parch</th>\n",
+              "      <th>Ticket</th>\n",
+              "      <th>Fare</th>\n",
+              "      <th>Cabin</th>\n",
+              "      <th>Embarked</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Braund, Mr. Owen Harris</td>\n",
+              "      <td>male</td>\n",
+              "      <td>22.0</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>A/5 21171</td>\n",
+              "      <td>7.2500</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>2</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1</td>\n",
+              "      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>\n",
+              "      <td>female</td>\n",
+              "      <td>38.0</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>PC 17599</td>\n",
+              "      <td>71.2833</td>\n",
+              "      <td>C85</td>\n",
+              "      <td>C</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>3</td>\n",
+              "      <td>1</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Heikkinen, Miss. Laina</td>\n",
+              "      <td>female</td>\n",
+              "      <td>26.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>STON/O2. 3101282</td>\n",
+              "      <td>7.9250</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>4</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1</td>\n",
+              "      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>\n",
+              "      <td>female</td>\n",
+              "      <td>35.0</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>113803</td>\n",
+              "      <td>53.1000</td>\n",
+              "      <td>C123</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>5</td>\n",
+              "      <td>0</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Allen, Mr. William Henry</td>\n",
+              "      <td>male</td>\n",
+              "      <td>35.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>373450</td>\n",
+              "      <td>8.0500</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>886</th>\n",
+              "      <td>887</td>\n",
+              "      <td>0</td>\n",
+              "      <td>2</td>\n",
+              "      <td>Montvila, Rev. Juozas</td>\n",
+              "      <td>male</td>\n",
+              "      <td>27.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>211536</td>\n",
+              "      <td>13.0000</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>887</th>\n",
+              "      <td>888</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1</td>\n",
+              "      <td>Graham, Miss. Margaret Edith</td>\n",
+              "      <td>female</td>\n",
+              "      <td>19.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>112053</td>\n",
+              "      <td>30.0000</td>\n",
+              "      <td>B42</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>888</th>\n",
+              "      <td>889</td>\n",
+              "      <td>0</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Johnston, Miss. Catherine Helen \"Carrie\"</td>\n",
+              "      <td>female</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>1</td>\n",
+              "      <td>2</td>\n",
+              "      <td>W./C. 6607</td>\n",
+              "      <td>23.4500</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>889</th>\n",
+              "      <td>890</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1</td>\n",
+              "      <td>Behr, Mr. Karl Howell</td>\n",
+              "      <td>male</td>\n",
+              "      <td>26.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>111369</td>\n",
+              "      <td>30.0000</td>\n",
+              "      <td>C148</td>\n",
+              "      <td>C</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>890</th>\n",
+              "      <td>891</td>\n",
+              "      <td>0</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Dooley, Mr. Patrick</td>\n",
+              "      <td>male</td>\n",
+              "      <td>32.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>370376</td>\n",
+              "      <td>7.7500</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Q</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>891 rows × 12 columns</p>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "     PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked\n",
+              "0              1         0       3  ...   7.2500   NaN         S\n",
+              "1              2         1       1  ...  71.2833   C85         C\n",
+              "2              3         1       3  ...   7.9250   NaN         S\n",
+              "3              4         1       1  ...  53.1000  C123         S\n",
+              "4              5         0       3  ...   8.0500   NaN         S\n",
+              "..           ...       ...     ...  ...      ...   ...       ...\n",
+              "886          887         0       2  ...  13.0000   NaN         S\n",
+              "887          888         1       1  ...  30.0000   B42         S\n",
+              "888          889         0       3  ...  23.4500   NaN         S\n",
+              "889          890         1       1  ...  30.0000  C148         C\n",
+              "890          891         0       3  ...   7.7500   NaN         Q\n",
+              "\n",
+              "[891 rows x 12 columns]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "aVWh9mpyORLD"
+      },
+      "source": [
+        ">먼저 상위 5개의 데이터만 확인해보겠습니다.\n",
+        "- `.head()`"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "eGCZ2PyxtvNY",
+        "outputId": "89cd054a-e789-4d47-d35a-04893dfc7ff0"
+      },
+      "source": [
+        "os.listdir() #os패키지 목록보기"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['1강 과제.ipynb의 사본',\n",
+              " '1-1강 python의 사본',\n",
+              " 'hour.csv',\n",
+              " 'creditcard.csv',\n",
+              " 'iris_dataset (1).csv',\n",
+              " 'titanic_train.csv',\n",
+              " 'Boston_house.csv',\n",
+              " 'app_sales.csv']"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 59
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "HP45KYx5B51d",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 204
+        },
+        "outputId": "7a2f59da-b1cd-4a97-8b26-0c3057733271"
+      },
+      "source": [
+        "# 상위 5개 데이터만 확인해보기\n",
+        "titanic_df.head(5)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>PassengerId</th>\n",
+              "      <th>Survived</th>\n",
+              "      <th>Pclass</th>\n",
+              "      <th>Name</th>\n",
+              "      <th>Sex</th>\n",
+              "      <th>Age</th>\n",
+              "      <th>SibSp</th>\n",
+              "      <th>Parch</th>\n",
+              "      <th>Ticket</th>\n",
+              "      <th>Fare</th>\n",
+              "      <th>Cabin</th>\n",
+              "      <th>Embarked</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Braund, Mr. Owen Harris</td>\n",
+              "      <td>male</td>\n",
+              "      <td>22.0</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>A/5 21171</td>\n",
+              "      <td>7.2500</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>2</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1</td>\n",
+              "      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>\n",
+              "      <td>female</td>\n",
+              "      <td>38.0</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>PC 17599</td>\n",
+              "      <td>71.2833</td>\n",
+              "      <td>C85</td>\n",
+              "      <td>C</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>3</td>\n",
+              "      <td>1</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Heikkinen, Miss. Laina</td>\n",
+              "      <td>female</td>\n",
+              "      <td>26.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>STON/O2. 3101282</td>\n",
+              "      <td>7.9250</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>4</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1</td>\n",
+              "      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>\n",
+              "      <td>female</td>\n",
+              "      <td>35.0</td>\n",
+              "      <td>1</td>\n",
+              "      <td>0</td>\n",
+              "      <td>113803</td>\n",
+              "      <td>53.1000</td>\n",
+              "      <td>C123</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>5</td>\n",
+              "      <td>0</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Allen, Mr. William Henry</td>\n",
+              "      <td>male</td>\n",
+              "      <td>35.0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>0</td>\n",
+              "      <td>373450</td>\n",
+              "      <td>8.0500</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>S</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "   PassengerId  Survived  Pclass  ...     Fare Cabin  Embarked\n",
+              "0            1         0       3  ...   7.2500   NaN         S\n",
+              "1            2         1       1  ...  71.2833   C85         C\n",
+              "2            3         1       3  ...   7.9250   NaN         S\n",
+              "3            4         1       1  ...  53.1000  C123         S\n",
+              "4            5         0       3  ...   8.0500   NaN         S\n",
+              "\n",
+              "[5 rows x 12 columns]"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 16
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8m9zZOonObMs"
+      },
+      "source": [
+        "> 전체 데이터셋의 여러 가지 정보를 확인해보는 코드입니다.\n",
+        " - `.shape` : 데이터셋의 크기\n",
+        " - `.info()` : 데이터셋의 요약 정보\n",
+        " - `.describe()` : 데이터셋의 기초 통계량"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YG7Gqk-uB_Rx",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "9dceffd0-f98a-4162-fdbb-11c457ad24d1"
+      },
+      "source": [
+        "# 데이터셋의 크기를 확인해보기\n",
+        "titanic_df.shape    # (행의 수, 열의수)"
+      ],
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(891, 12)"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Bf5sBMXrCHjH"
+      },
+      "source": [
+        "# 데이터셋의 요약 정보 확인하기\n",
+        "titanic_df.info()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "kMG6QHG2CRKc"
+      },
+      "source": [
+        "# 데이터셋의 기초 통계량 확인하기\n",
+        "titanic_df.describe()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "VRW9IkC7Pr1s"
+      },
+      "source": [
+        "> 🔍 지금까지 배운 내용을 활용해서 데이터를 필터링해보겠습니다.  \n",
+        "- Age와 Name 열만 출력\n",
+        "- Age가 60세 이상\n",
+        "- 상위 3개만 출력"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MvVvW6hNCXJO"
+      },
+      "source": [
+        "titanic_df[???].head(3)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "R1aJTzADC36a"
+      },
+      "source": [
+        "# loc을 사용하여 필터링하기\n",
+        "titanic_df.???.head(3)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "aVDNh6CvWUJT"
+      },
+      "source": [
+        "> 조건이 많아질 때 필터링하는 방법은 어떻게 될까요?  \n",
+        " - Age는 60세 이상\n",
+        " - Pclass가 1등급\n",
+        " - Sex가 female  \n",
+        ">\n",
+        " >인 데이터만 필터링!!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fHyNDTXwEffs"
+      },
+      "source": [
+        "# ()와 &를 잘 활용하면 요령은 똑같습니다!\n",
+        "???"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xe7ANz64cLCX"
+      },
+      "source": [
+        "`len()`을 활용하면 필터링된 데이터의 총량을 알 수 있습니다.\n",
+        "> 다음은 Pclass별 여성의 생존자 수를 구하는 코드입니다.\n",
+        "- 꼼꼼히 살펴보고 이해하는 게 중요합니다! 😵"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "G-oY6ICZH-R9"
+      },
+      "source": [
+        "# Survived의 경우 1일 경우가 사망인 데이터입니다\n",
+        "print('1등급 여성 생존자', len(titanic_df[(titanic_df['Pclass']==1) & (titanic_df['Sex'] == 'female') & (titanic_df['Survived'] == 1)]))   \n",
+        "print('2등급 여성 생존자', len(titanic_df[(titanic_df['Pclass']==2) & (titanic_df['Sex'] == 'female') & (titanic_df['Survived'] == 1)]))\n",
+        "print('3등급 여성 생존자', len(titanic_df[(titanic_df['Pclass']==3) & (titanic_df['Sex'] == 'female') & (titanic_df['Survived'] == 1)]))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "PBy_x5fwdGJ_"
+      },
+      "source": [
+        "> 다음은 Pclass별로 남성 생존자 수를 구하는 코드입니다."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cnJwL8tXJOTB"
+      },
+      "source": [
+        "print('1등급 남성 생존자', len(titanic_df[(titanic_df['Pclass']==1) & (titanic_df['Sex'] == 'male') & (titanic_df['Survived'] == 1)]))\n",
+        "print('2등급 남성 생존자', len(titanic_df[(titanic_df['Pclass']==2) & (titanic_df['Sex'] == 'male') & (titanic_df['Survived'] == 1)]))\n",
+        "print('3등급 남성 생존자', len(titanic_df[(titanic_df['Pclass']==3) & (titanic_df['Sex'] == 'male') & (titanic_df['Survived'] == 1)]))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "REsbXB5Tw3ny"
+      },
+      "source": [
+        "> `.groupby()` 이용해보기\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xk8WhJSAFJ3G"
+      },
+      "source": [
+        "# Pclass를 인덱스 레이블로 다른 속성들의 관계 살펴보기\n",
+        "titanic_groupby = titanic_df.groupby(by='Pclass').count()\n",
+        "titanic_groupby"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "A_Zemtq9uCei"
+      },
+      "source": [
+        "# 🖐 오늘 하루도 고생하셨습니다!! 다음 수업 때 뵐게요 🖐\n",
+        "\n",
+        "![대체 텍스트](https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F2373274A51E13C4120)\n",
+        "\n",
+        "한 번 더 다른 컨텐츠로 판다스를 복습하고 싶다면?  \n",
+        "\n",
+        "글로벌 데이터 사이언스의 대명사 Kaggle에서 판다스 기초 학습이 가능합니다!**(😱영어 주의😭)**  \n",
+        "\n",
+        "https://www.kaggle.com/residentmario/creating-reading-and-writing\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "inLeru4AuFTK"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
